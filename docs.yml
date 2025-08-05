@@ -1,0 +1,57 @@
+#CABEÇALHO
+openapi: 3.0.0
+info:
+  title: Conversor de Decimal para Binário API
+  version: 1.0.0
+  description: |
+    Uma API que converte um número decimal para sua representação binária.
+
+    ## Endpoints:
+    - `/to-binary/:decimal`: Converte um número decimal para binário.
+
+#SERVIDORES
+servers:
+  - url: http://localhost:3000
+    description: Servidor de desenvolvimento local
+
+paths:
+  /to-binary/{decimal}:
+    get:
+      summary: Converter decimal para binário
+      description: Converte um número decimal fornecido como parâmetro de caminho para sua representação binária.
+
+      #PARAMETROS      
+      parameters:
+        - name: decimal
+          in: path
+          required: true
+          description: O número decimal a ser convertido para binário.
+          schema:
+            type: integer
+            example: 10
+
+      #RESPOSTAS      
+      responses:
+        '200':
+          description: Resposta bem-sucedida com os valores decimal e binário.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  decimal:
+                    type: integer
+                    example: 10
+                  binary:
+                    type: string
+                    example: "1010"
+        '400':
+          description: Número decimal inválido fornecido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Número decimal inválido"
